@@ -1,0 +1,11 @@
+.container {
+    width: 100%;
+    height: calc(100% - 20px);
+    margin: 10px;
+    overflow-y: auto;
+    background-color: lightgrey;
+}
+
+.preview {
+    padding-left: 20px;
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Level } from 'src/app/model/level.interface';
 import { StateService } from 'src/app/services/state.service';
 
@@ -9,12 +10,15 @@ import { StateService } from 'src/app/services/state.service';
 })
 export class LevelSelectComponent implements OnInit {
 
-  constructor(public state: StateService) { }
+  constructor(public state: StateService, private router: Router) { }
 
   ngOnInit() {}
 
   selectLevel(l: Level) {
-
+    this.state.levelName = l.name;
+    const details = l.load();
+    this.state.goalHTML = details.goalHTML;
+    this.router.navigateByUrl('game-field');
   }
 
 }

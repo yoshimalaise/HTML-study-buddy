@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { GameFieldComponent } from './game-field/game-field.component';
 import { LevelSelectComponent } from './home/components/level-select/level-select.component';
 
 const routes: Routes = [
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: 'level-select',
     component: LevelSelectComponent
+  },
+  {
+    path: 'game-field',
+    component: GameFieldComponent
   }
 ];
 

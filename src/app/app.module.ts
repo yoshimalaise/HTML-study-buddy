@@ -9,9 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 import { LevelSelectComponent } from './home/components/level-select/level-select.component';
 import { FormsModule } from '@angular/forms';
+import { GameFieldComponent } from './game-field/game-field.component';
+import { CodeEditorComponent } from './game-field/components/code-editor/code-editor.component';
+import { GoalSnippetComponent } from './game-field/components/goal-snippet/goal-snippet.component';
+import { ResultViewComponent } from './game-field/components/result-view/result-view.component';
 
 @NgModule({
-  declarations: [AppComponent, LevelSelectComponent],
+  declarations: [AppComponent, LevelSelectComponent, GameFieldComponent, CodeEditorComponent, GoalSnippetComponent,
+    ResultViewComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, CommonModule, FormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

@@ -6,6 +6,9 @@ import { allLevelGroups } from '../data/levels';
 })
 export class StateService {
   public levelGroups = allLevelGroups;
+  public levelName: string = "";
+  public currentHTML = "";
+  public goalHTML = "";
 
 
   constructor() { }

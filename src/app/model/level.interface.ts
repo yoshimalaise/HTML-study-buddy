@@ -1,6 +1,7 @@
+import { LevelDetails } from "./level-details.interface";
+
 export interface Level {
     name: string;
-    id: number; 
     completed: boolean;
-    load: () => void ;
+    load: () => LevelDetails ;
 }

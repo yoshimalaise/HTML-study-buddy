@@ -30,7 +30,7 @@
             <h3> {{ lgroup.name }}</h3>
 
             <ion-list>
-              <ion-item (click)="selectLevel(level)" *ngFor="let level of lgroup.levels">
+              <ion-item button (click)="selectLevel(level)" *ngFor="let level of lgroup.levels">
                   <ion-label> {{ level.name }}</ion-label>
                   <ion-checkbox disabled [(ngModel)]="level.completed" slot="end"></ion-checkbox>
               </ion-item>

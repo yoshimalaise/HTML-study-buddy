@@ -1,0 +1,21 @@
+.notebook {
+    width: 100%;
+    height: calc(100% - 20px);
+    margin: 10px;
+    background-color: beige;
+    overflow-y: auto;
+}
+
+.lines {
+    border-left: 1px solid #ffaa9f;
+    border-right: 1px solid #ffaa9f;
+    width: 4px;
+    float: left;
+    height: 100%;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+.preview {
+    padding-left: 20px;
+}

@@ -1,0 +1,21 @@
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.code-editor {
+    height: 100%;
+    width: 34%;
+}
+
+.result-viewer {
+    height: 100%;
+    width: 33%;
+}
+
+.goal-snippet {
+    height: 100%;
+    width: 33%;
+}

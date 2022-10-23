@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+     {{ state.levelName }}
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="container">
+    <app-code-editor class="code-editor"></app-code-editor>
+    <app-result-view class="result-viewer"></app-result-view>
+    <app-goal-snippet class="goal-snippet"></app-goal-snippet>
+  </div>
+
+</ion-content>
