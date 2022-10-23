@@ -1,3 +1,7 @@
-<p>
-  code-editor works!
-</p>
+<div class="container">
+  <!--We abuse the javascript code generator to generate HTML-->
+  <ngx-blockly #blocklyComponent 
+    [customBlocks]="state.customBlocks" 
+    class="code" [config]="config" 
+    (javascriptCode)="onCode($event)"></ngx-blockly>
+</div>

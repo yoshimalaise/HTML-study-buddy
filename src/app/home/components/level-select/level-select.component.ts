@@ -18,6 +18,9 @@ export class LevelSelectComponent implements OnInit {
     this.state.levelName = l.name;
     const details = l.load();
     this.state.goalHTML = details.goalHTML;
+    this.state.customBlocks = details.customBlocks;
+    this.state.toolboxXML = details.toolboxXML;
+    this.state.workspaceXML = details.workSpaceXML;
     this.router.navigateByUrl('game-field');
   }
 

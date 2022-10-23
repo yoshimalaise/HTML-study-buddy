@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
+import { NgxBlocklyModule } from 'ngx-blockly';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
@@ -17,7 +17,8 @@ import { ResultViewComponent } from './game-field/components/result-view/result-
 @NgModule({
   declarations: [AppComponent, LevelSelectComponent, GameFieldComponent, CodeEditorComponent, GoalSnippetComponent,
     ResultViewComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, CommonModule, FormsModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, CommonModule, 
+    FormsModule, NgxBlocklyModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
