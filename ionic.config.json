@@ -1,0 +1,7 @@
+{
+  "name": "kitchen-coder",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
