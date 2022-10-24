@@ -12,7 +12,7 @@
   <h4>Here are some element you will probably need:</h4>
   <div class="element-hint-container" *ngFor="let elHint of state.hintVM.requiredElements">
     <h6>{{ elHint.name }} </h6>
-    <span>{{ elHint.description }}</span><br/>
+    <span>{{ elHint.description }}</span><br/><br/>
     <span><a [href]="elHint.link" target="_blank">Read more on the documentation page</a></span>
   </div>
 </ion-content>
