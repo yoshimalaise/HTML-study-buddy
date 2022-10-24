@@ -14,7 +14,7 @@ export class CodeCheckService {
     const goalCodeWithoutWhiteSpace = this.state.goalHTML.replace(/\s/g,'');
     console.log("comparing usercode", codeWithoutWhiteSpace, 'with', goalCodeWithoutWhiteSpace);
     if (codeWithoutWhiteSpace === goalCodeWithoutWhiteSpace) {
-      alert("Congratulations! This one is perfecly digitized.");
+      alert("Congratulations! This one is perfecly implemented.");
       this.state.markLevelAsComplete();
       this.router.navigateByUrl('level-select');
     } else {

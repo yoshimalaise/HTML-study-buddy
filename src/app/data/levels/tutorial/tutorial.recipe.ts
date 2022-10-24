@@ -9,11 +9,11 @@ import { ParagraphBlock } from "../../shared-blocks/paragraph.block";
 const goalHTML = `
 <h1>Welcome to the team!</h1>
 <p>
-We are so happy to finally have someone with the technical know-how to make digital versions of our famous recipes!
+We are so happy to finally have someone with the technical know-how to turn our designs into websites!
 </p>
 
 <p>
-You can not imagine how stressful it is to always have to worry about losing the old recipe book when we come to work.
+With you on board we will have our project live in no time!
 </p>
 
 <p>
@@ -45,10 +45,10 @@ export function getTutorialLevel(): Level {
                                                 <field name="body">Welcome to the team!</field>
                                                 <next>
                                                     <block type="paragraph">
-                                                        <field name="body">We are so happy to finally have someone with the technical know-how to make digital versions of our famous recipes!</field>
+                                                        <field name="body">We are so happy to finally have someone with the technical know-how to turn our designs into websites!</field>
                                                             <next>
                                                                 <block type="paragraph">
-                                                                    <field name="body">You can not imagine how stressful it is to always have to worry about losing the old recipe book when we come to work.</field>
+                                                                    <field name="body">With you on board we will have our project live in no time!</field>
                                                                 </block>
                                                             </next>
                                                     </block>
@@ -73,10 +73,10 @@ export function getTutorialLevel(): Level {
                                         <field name="body">Welcome to the team!</field>
                                     </block>
                                     <block type="paragraph">
-                                        <field name="body">We are so happy to finally have someone with the technical know-how to make digital versions of our famous recipes!</field>
+                                        <field name="body">We are so happy to finally have someone with the technical know-how to turn our designs into websites!</field>
                                     </block>
                                     <block type="paragraph">
-                                        <field name="body">You can not imagine how stressful it is to always have to worry about losing the old recipe book when we come to work.</field>
+                                        <field name="body">With you on board we will have our project live in no time!</field>
                                     </block>
                                     <block type="paragraph">
                                         <field name="body">I have to go for now, customers are waiting, good luck with the job!</field>
