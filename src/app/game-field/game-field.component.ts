@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { StateService } from '../services/state.service';
 import { ModalController } from '@ionic/angular';
 import { HintScreenModalComponent } from '../modals/hint-screen-modal/hint-screen-modal.component';
@@ -8,10 +8,11 @@ import { HintScreenModalComponent } from '../modals/hint-screen-modal/hint-scree
   templateUrl: './game-field.component.html',
   styleUrls: ['./game-field.component.scss'],
 })
-export class GameFieldComponent implements OnInit {
+export class GameFieldComponent implements OnInit, AfterViewInit {
+  currentTab: 'code' | 'result' | 'goal' = 'code';
 
   constructor(public state: StateService, private modalCtrl: ModalController) { }
-
+  
   ngOnInit() {}
 
   async showHelp() {
@@ -21,4 +22,9 @@ export class GameFieldComponent implements OnInit {
     modal.present();
   }
 
+  ngAfterViewInit(): void {
+   
+  }
+
+ 
 }
