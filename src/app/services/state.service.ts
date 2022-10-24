@@ -18,6 +18,7 @@ export class StateService {
   public workspaceXML: string = "";
   public hintVM: HintScreenViewModel;
   public isMobileDevice: boolean = false;
+  public showTutorial: boolean = false;
 
 
   constructor(private deviceDetector: DeviceDetectorService) {

@@ -25,6 +25,7 @@
     "@capacitor/keyboard": "4.0.1",
     "@capacitor/status-bar": "4.0.1",
     "@ionic/angular": "^6.1.9",
+    "angular-shepherd": "^14.0.0",
     "ionicons": "^6.0.3",
     "ngx-blockly": "^13.0.1",
     "ngx-device-detector": "^4.0.1",

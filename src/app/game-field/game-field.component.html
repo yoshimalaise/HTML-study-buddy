@@ -7,7 +7,7 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button (click)="showHelp()">
+      <ion-button id="help-button" (click)="showHelp()">
         <ion-icon name="information-circle"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -16,16 +16,16 @@
 
 <ion-content [fullscreen]="true">
   <div class="container" *ngIf="!state.isMobileDevice">
-    <app-code-editor class="code-editor"></app-code-editor>
-    <app-result-view class="result-viewer"></app-result-view>
-    <app-goal-snippet class="goal-snippet"></app-goal-snippet>
+    <app-code-editor id="code-editor" class="code-editor"></app-code-editor>
+    <app-result-view id="result-viewer" class="result-viewer"></app-result-view>
+    <app-goal-snippet id="goal-snippet" class="goal-snippet"></app-goal-snippet>
   </div>
 
   <div class="mobile-container" *ngIf="state.isMobileDevice">
 
-    <app-code-editor [style.display]="currentTab === 'code' ? 'block' : 'none'" class="mobile-code-editor"></app-code-editor>
-    <app-result-view [style.display]="currentTab === 'result' ? 'block' : 'none'" class="mobile-result-viewer"></app-result-view>
-    <app-goal-snippet [style.display]="currentTab === 'goal' ? 'block' : 'none'" class="mobile-goal-snippet"></app-goal-snippet>
+    <app-code-editor id="code-editor" [style.display]="currentTab === 'code' ? 'block' : 'none'" class="mobile-code-editor"></app-code-editor>
+    <app-result-view id="result-viewer" [style.display]="currentTab === 'result' ? 'block' : 'none'" class="mobile-result-viewer"></app-result-view>
+    <app-goal-snippet id="goal-snippet" [style.display]="currentTab === 'goal' ? 'block' : 'none'" class="mobile-goal-snippet"></app-goal-snippet>
 
     <ion-segment [(ngModel)]="currentTab">
       <ion-segment-button value="code">

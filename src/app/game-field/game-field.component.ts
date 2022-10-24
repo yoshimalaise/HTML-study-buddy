@@ -1,7 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { StateService } from '../services/state.service';
 import { ModalController } from '@ionic/angular';
+import { ShepherdService } from 'angular-shepherd';
 import { HintScreenModalComponent } from '../modals/hint-screen-modal/hint-screen-modal.component';
+import { tutorialSteps } from './tutorials/main.tutorial';
 
 @Component({
   selector: 'app-game-field',
@@ -11,7 +13,7 @@ import { HintScreenModalComponent } from '../modals/hint-screen-modal/hint-scree
 export class GameFieldComponent implements OnInit, AfterViewInit {
   currentTab: 'code' | 'result' | 'goal' = 'code';
 
-  constructor(public state: StateService, private modalCtrl: ModalController) { }
+  constructor(public state: StateService, private modalCtrl: ModalController, private shepherdService: ShepherdService) { }
   
   ngOnInit() {}
 
@@ -23,7 +25,12 @@ export class GameFieldComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-   
+   if (this.state.showTutorial) {
+    this.shepherdService.modal = true;
+    this.shepherdService.confirmCancel = false;
+    this.shepherdService.addSteps(tutorialSteps);
+    this.shepherdService.start();
+   }
   }
 
  

@@ -22,6 +22,7 @@ export class LevelSelectComponent implements OnInit {
     this.state.toolboxXML = details.toolboxXML;
     this.state.workspaceXML = details.workSpaceXML;
     this.state.hintVM = details.hintVM;
+    this.state.showTutorial = false;
     this.router.navigateByUrl('game-field');
   }
 
