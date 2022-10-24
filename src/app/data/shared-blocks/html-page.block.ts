@@ -10,7 +10,9 @@ export class HtmlPageBlock extends CustomBlock {
 
     defineBlock() {
         this.block.appendDummyInput()
-        .appendField("<html>");
+            .appendField("<!DOCTYPE html>");
+        this.block.appendDummyInput()
+            .appendField("<html>");
         this.block.appendDummyInput()
             .appendField("    <head>");
         this.block.appendDummyInput()
