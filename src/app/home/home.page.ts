@@ -16,6 +16,11 @@ export class HomePage {
     this.router.navigateByUrl('level-select');
   }
 
+  showAbout() {
+    this.router.navigateByUrl('about');
+  }
+
+
   startTutorial() {
     this.state.levelName = 'Tutorial';
     this.state.showTutorial = true;
