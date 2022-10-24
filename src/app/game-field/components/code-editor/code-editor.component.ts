@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxBlocklyConfig, NgxBlocklyGenerator, Blockly } from 'ngx-blockly';
 import { CodeCheckService } from 'src/app/services/code-check.service';
@@ -39,6 +39,11 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
     console.log(code);
     this.state.currentHTML = code;
     const userIsCorrect = this.codeCheckService.performCodeCheck(code);
+  }
+
+  @HostListener('unloaded')
+  ngOndeDestroy() {
+
   }
 
 }
