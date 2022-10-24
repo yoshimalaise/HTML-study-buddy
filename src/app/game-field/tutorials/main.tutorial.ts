@@ -1,4 +1,5 @@
-export const tutorialSteps = [
+export function getTutorialSteps(navigationCallback): any[] {
+  return [
     {
         id: "welcome",
         buttons: [
@@ -13,6 +14,18 @@ export const tutorialSteps = [
     },
     {
         id: "notebook",
+        attachTo: { 
+          element: '#goal-snippet', 
+          on: 'left'
+        },
+        beforeShowPromise: function() {
+          return new Promise(function(resolve) {
+            navigationCallback('goal')
+            setTimeout(function() {
+              resolve('');
+            }, 500);
+          });
+        },
         buttons: [
             {
               classes: 'shepherd-button-primary',
@@ -30,6 +43,18 @@ export const tutorialSteps = [
     },
     {
         id: "codespace",
+        attachTo: { 
+          element: '#code-editor', 
+          on: 'right'
+        },
+        beforeShowPromise: function() {
+          return new Promise(function(resolve) {
+            navigationCallback('code')
+            setTimeout(function() {
+              resolve('');
+            }, 500);
+          });
+        },
         buttons: [
             {
               classes: 'shepherd-button-primary',
@@ -47,6 +72,10 @@ export const tutorialSteps = [
     },
     {
         id: "codespace2",
+        attachTo: { 
+          element: '#code-editor', 
+          on: 'right'
+        },
         buttons: [
             {
               classes: 'shepherd-button-primary',
@@ -64,6 +93,18 @@ export const tutorialSteps = [
     },
     {
         id: "result",
+        attachTo: { 
+          element: '#result-viewer', 
+          on: 'right'
+        },
+        beforeShowPromise: function() {
+          return new Promise(function(resolve) {
+            navigationCallback('result')
+            setTimeout(function() {
+              resolve('');
+            }, 500);
+          });
+        },
         buttons: [
             {
               classes: 'shepherd-button-primary',
@@ -97,3 +138,4 @@ export const tutorialSteps = [
         text: ['Have fun completing all the recipes! Good luck and thanks for your help!'],
     },
 ];
+}

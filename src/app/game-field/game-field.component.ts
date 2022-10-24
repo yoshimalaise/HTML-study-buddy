@@ -3,7 +3,7 @@ import { StateService } from '../services/state.service';
 import { ModalController } from '@ionic/angular';
 import { ShepherdService } from 'angular-shepherd';
 import { HintScreenModalComponent } from '../modals/hint-screen-modal/hint-screen-modal.component';
-import { tutorialSteps } from './tutorials/main.tutorial';
+import { getTutorialSteps } from './tutorials/main.tutorial';
 
 @Component({
   selector: 'app-game-field',
@@ -28,7 +28,7 @@ export class GameFieldComponent implements OnInit, AfterViewInit {
    if (this.state.showTutorial) {
     this.shepherdService.modal = true;
     this.shepherdService.confirmCancel = false;
-    this.shepherdService.addSteps(tutorialSteps);
+    this.shepherdService.addSteps(getTutorialSteps((tab) => this.currentTab = tab));
     this.shepherdService.start();
    }
   }

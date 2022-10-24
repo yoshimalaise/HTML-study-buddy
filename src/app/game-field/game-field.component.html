@@ -23,16 +23,16 @@
 
   <div class="mobile-container" *ngIf="state.isMobileDevice">
 
-    <app-code-editor id="code-editor" [style.display]="currentTab === 'code' ? 'block' : 'none'" class="mobile-code-editor"></app-code-editor>
-    <app-result-view id="result-viewer" [style.display]="currentTab === 'result' ? 'block' : 'none'" class="mobile-result-viewer"></app-result-view>
+    <app-code-editor  id="code-editor" [style.display]="currentTab === 'code' ? 'block' : 'none'" class="mobile-code-editor"></app-code-editor>
+    <app-result-view  id="result-viewer" [style.display]="currentTab === 'result' ? 'block' : 'none'" class="mobile-result-viewer"></app-result-view>
     <app-goal-snippet id="goal-snippet" [style.display]="currentTab === 'goal' ? 'block' : 'none'" class="mobile-goal-snippet"></app-goal-snippet>
 
     <ion-segment [(ngModel)]="currentTab">
-      <ion-segment-button value="code">
+      <ion-segment-button  value="code">
         <ion-icon name="extension-puzzle-outline"></ion-icon>
         <ion-label>Code</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="result">
+      <ion-segment-button  value="result">
         <ion-icon name="globe-outline"></ion-icon>
         <ion-label>Result</ion-label>
       </ion-segment-button>
