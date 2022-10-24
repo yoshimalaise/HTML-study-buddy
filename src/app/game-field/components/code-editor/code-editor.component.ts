@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxBlocklyConfig, NgxBlocklyGenerator, Blockly } from 'ngx-blockly';
 import { CodeCheckService } from 'src/app/services/code-check.service';
 import { StateService } from 'src/app/services/state.service';
+import * as JavaScript from "blockly/javascript";
 
 @Component({
   selector: 'app-code-editor',
@@ -27,10 +28,8 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.workspace.fromXml(this.state.workspaceXML);
-    // const ws = this.workspace.workspace;
-    // const g = new Blockly.Generator(NgxBlocklyGenerator.JAVASCRIPT);
-    // alert(g.workspaceToCode(ws));
-    // todo find a way to get blockly to generate HTML already here
+    const ws = this.workspace.workspace;
+    this.state.currentHTML = JavaScript.workspaceToCode(ws);
   }
 
   ngOnInit() {}
@@ -39,6 +38,11 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
     console.log(code);
     this.state.currentHTML = code;
     const userIsCorrect = this.codeCheckService.performCodeCheck(code);
+  }
+
+  @HostListener('unloaded')
+  ngOndeDestroy() {
+
   }
 
 }

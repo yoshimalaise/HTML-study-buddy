@@ -35,7 +35,6 @@ export class HtmlPageBlock extends CustomBlock {
 
     toJavaScriptCode(block: Blockly.Block): string | any[] {
         var statements_body = JavaScript.statementToCode(block, 'body');
-        // TODO: Assemble JavaScript into code variable.
         var code = statements_body;
         return code;
       }

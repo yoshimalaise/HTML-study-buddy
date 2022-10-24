@@ -121,6 +121,27 @@ export function getTutorialSteps(navigationCallback): any[] {
         text: ['Here you can see the output of your current HTML document. You should make sure to match the recipe in the notebook as close as possible, but in terms of content and style. As you can see your current website is still missing a paragraph!'],
     },
     {
+      id: "help",
+      attachTo: { 
+        element: '#help-button', 
+        on: 'bottom'
+      },
+      buttons: [
+          {
+            classes: 'shepherd-button-primary',
+            text: 'Back',
+            type: 'back'
+          },
+          {
+            classes: 'shepherd-button-primary',
+            text: 'Next',
+            type: 'next'
+          }
+      ],
+      title: 'Help button',
+      text: ['If you get stuck writing the code you can press the help button, a popup will show with additional information about the element you will need.'],
+  },
+    {
         id: "bye",
         buttons: [
             {
