@@ -9,7 +9,7 @@ import { getH1ElementHint, getPElementHint } from "../../element-hints/element-h
 const goalHTML = `
 <h1> Welcome party</h1>
 <p>
-No actual recipe yet. But we have a few cool paragraphs here, try to replicate them.
+No actual design yet. But we have a few cool paragraphs here, try to replicate them.
 </p>
 
 <p>
@@ -25,7 +25,7 @@ Fusce vel magna placerat, mollis nunc eu, semper odio. Vestibulum ut velit a lac
 `;
 
 const hintVM: HintScreenViewModel = {
-    generalComment: "This is the very first recipe that should get you used to using headings and paragraphs",
+    generalComment: "This is the very first design that should get you used to using headings and paragraphs",
     requiredElements: [
         getPElementHint(),
         getH1ElementHint()
@@ -46,18 +46,27 @@ export const WelcomePartyRecipe: Level = {
             toolboxXML: `<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
                             <category name="headings">
                                 <block type="heading_1">
-                                    <field name="body">heading 1</field>
+                                    <field name="body">Welcome party</field>
                                 </block>
                                 <block type="heading_2">
-                                    <field name="body">heading 2</field>
+                                    <field name="body">Welcome party</field>
                                 </block>
                                 <block type="heading_3">
-                                    <field name="body">heading 3</field>
+                                    <field name="body">Welcome party</field>
                                 </block>
                             </category>
                             <category name="content">
                                 <block type="paragraph">
                                     <field name="body">paragraph</field>
+                                </block>
+                                <block type="paragraph">
+                                    <field name="body">No actual design yet. But we have a few cool paragraphs here, try to replicate them.</field>
+                                </block>
+                                <block type="paragraph">
+                                    <field name="body">Morbi dictum placerat augue. Phasellus sit amet venenatis mi. Curabitur vitae nisl eu diam hendrerit porta. Mauris sagittis blandit eros a efficitur.</field>
+                                </block>
+                                <block type="paragraph">
+                                    <field name="body">Fusce vel magna placerat, mollis nunc eu, semper odio. Vestibulum ut velit a lacus consectetur fringilla auctor et ipsum. Cras aliquam id nibh sodales viverra. Etiam non placerat elit. Duis tempus eros quis augue scelerisque, placerat cursus arcu pharetra. Aliquam convallis, mauris id auctor tempus, odio eros molestie turpis, ac porttitor ante risus ac nisi. Donec convallis maximus purus ac dictum. Praesent convallis varius nisi, sed pretium ante sollicitudin quis. Aliquam molestie massa a mattis sagittis. Phasellus ac tortor justo. Nulla in libero fermentum, rhoncus justo et, dignissim ante. Suspendisse ultrices elementum enim, sed lacinia orci ullamcorper vitae. Nullam at pretium libero. Nulla sit amet elit vitae magna dignissim efficitur. Curabitur sit amet lorem a mauris fringilla convallis.</field>
                                 </block>
                             </category>
                           </xml>`
