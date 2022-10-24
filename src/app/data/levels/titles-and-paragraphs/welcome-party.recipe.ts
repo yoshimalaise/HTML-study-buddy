@@ -3,6 +3,8 @@ import { HtmlPageBlock } from "../../shared-blocks/html-page.block";
 import { Block, Blockly, CustomBlock } from "ngx-blockly";
 import { Heading1Block, Heading2Block, Heading3Block } from "../../shared-blocks/headings.block";
 import { ParagraphBlock } from "../../shared-blocks/paragraph.block";
+import { HintScreenViewModel } from "src/app/model/hint-screen-vm.interface";
+import { getH1ElementHint, getPElementHint } from "../../element-hints/element-hints";
 
 const goalHTML = `
 <h1> Welcome party</h1>
@@ -22,12 +24,21 @@ Fusce vel magna placerat, mollis nunc eu, semper odio. Vestibulum ut velit a lac
 
 `;
 
+const hintVM: HintScreenViewModel = {
+    generalComment: "This is the very first recipe that should get you used to using headings and paragraphs",
+    requiredElements: [
+        getPElementHint(),
+        getH1ElementHint()
+    ]
+}
+
 export const WelcomePartyRecipe: Level = {
     name: "Welcome Party",
     completed: false,
     load: () => {
         return {
             goalHTML,
+            hintVM,
             customBlocks: [new HtmlPageBlock(), new Heading1Block(), new Heading2Block(), new Heading3Block(), new ParagraphBlock()],
             workSpaceXML: `<xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none">
                                 <block type="html_body" id="2}pD0ohd?eOQABj^8xHc" x="163" y="63"></block>

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { allLevelGroups } from '../data/levels';
 import {  CustomBlock } from "ngx-blockly";
+import { HintScreenViewModel } from '../model/hint-screen-vm.interface';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 
 @Injectable({
@@ -14,9 +16,13 @@ export class StateService {
   public customBlocks: CustomBlock[] = [];
   public toolboxXML: string = "";
   public workspaceXML: string = "";
+  public hintVM: HintScreenViewModel;
+  public isMobileDevice: boolean = false;
+  public showTutorial: boolean = false;
 
 
-  constructor() {
+  constructor(private deviceDetector: DeviceDetectorService) {
+    this.isMobileDevice = deviceDetector.isMobile();
     setTimeout(() => this.markCompletedLevels() , 300);
    }
 

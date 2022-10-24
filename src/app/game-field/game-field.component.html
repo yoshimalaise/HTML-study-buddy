@@ -6,20 +6,43 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button id="help-button" (click)="showHelp()">
+        <ion-icon name="information-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div class="container">
-    <app-code-editor class="code-editor"></app-code-editor>
-    <app-result-view class="result-viewer"></app-result-view>
-    <app-goal-snippet class="goal-snippet"></app-goal-snippet>
+  <div class="container" *ngIf="!state.isMobileDevice">
+    <app-code-editor id="code-editor" class="code-editor"></app-code-editor>
+    <app-result-view id="result-viewer" class="result-viewer"></app-result-view>
+    <app-goal-snippet id="goal-snippet" class="goal-snippet"></app-goal-snippet>
   </div>
+
+  <div class="mobile-container" *ngIf="state.isMobileDevice">
+
+    <app-code-editor  id="code-editor" [style.display]="currentTab === 'code' ? 'block' : 'none'" class="mobile-code-editor"></app-code-editor>
+    <app-result-view  id="result-viewer" [style.display]="currentTab === 'result' ? 'block' : 'none'" class="mobile-result-viewer"></app-result-view>
+    <app-goal-snippet id="goal-snippet" [style.display]="currentTab === 'goal' ? 'block' : 'none'" class="mobile-goal-snippet"></app-goal-snippet>
+
+    <ion-segment [(ngModel)]="currentTab">
+      <ion-segment-button  value="code">
+        <ion-icon name="extension-puzzle-outline"></ion-icon>
+        <ion-label>Code</ion-label>
+      </ion-segment-button>
+      <ion-segment-button  value="result">
+        <ion-icon name="globe-outline"></ion-icon>
+        <ion-label>Result</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="goal">
+        <ion-icon name="book-outline"></ion-icon>
+        <ion-label>Original</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  
 
 </ion-content>

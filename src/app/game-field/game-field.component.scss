@@ -19,3 +19,17 @@
     height: 100%;
     width: 33%;
 }
+
+/** mobile only css **/
+.mobile-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mobile-result-viewer, .mobile-goal-snippet, .mobile-code-editor {
+    height: calc(100% - 40px);
+    width: 100%;
+}
