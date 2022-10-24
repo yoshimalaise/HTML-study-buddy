@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AboutPageComponent } from './about-page/about-page.component';
 import { GameFieldComponent } from './game-field/game-field.component';
 import { LevelSelectComponent } from './home/components/level-select/level-select.component';
 
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'game-field',
     component: GameFieldComponent
+  },
+  {
+    path: 'about',
+    component: AboutPageComponent
   }
 ];
 

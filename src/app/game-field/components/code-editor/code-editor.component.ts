@@ -12,6 +12,7 @@ import * as JavaScript from "blockly/javascript";
 })
 export class CodeEditorComponent implements OnInit, AfterViewInit {
   @ViewChild('blocklyComponent') workspace: any;
+  private lastCode = "";
 
   public config: NgxBlocklyConfig = {
     toolbox: this.state.toolboxXML,
@@ -37,7 +38,15 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
   onCode(code: string) {
     console.log(code);
     this.state.currentHTML = code;
-    const userIsCorrect = this.codeCheckService.performCodeCheck(code);
+    // wait a bit before doing the check so the puzzle can first snap nicely and the user can see the result
+    const strippedCode = code.replace(/\s/g,'');
+    if (strippedCode !== this.lastCode) {
+      this.lastCode = strippedCode;
+      setTimeout(() => {
+        this.codeCheckService.performCodeCheck(code);
+      }, 3000);
+    }
+    
   }
 
   @HostListener('unloaded')
