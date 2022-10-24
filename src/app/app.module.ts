@@ -13,10 +13,11 @@ import { GameFieldComponent } from './game-field/game-field.component';
 import { CodeEditorComponent } from './game-field/components/code-editor/code-editor.component';
 import { GoalSnippetComponent } from './game-field/components/goal-snippet/goal-snippet.component';
 import { ResultViewComponent } from './game-field/components/result-view/result-view.component';
+import { HintScreenModalComponent } from './modals/hint-screen-modal/hint-screen-modal.component';
 
 @NgModule({
   declarations: [AppComponent, LevelSelectComponent, GameFieldComponent, CodeEditorComponent, GoalSnippetComponent,
-    ResultViewComponent],
+    ResultViewComponent, HintScreenModalComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, CommonModule, 
     FormsModule, NgxBlocklyModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

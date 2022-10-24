@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { allLevelGroups } from '../data/levels';
 import {  CustomBlock } from "ngx-blockly";
+import { HintScreenViewModel } from '../model/hint-screen-vm.interface';
 
 
 @Injectable({
@@ -14,6 +15,7 @@ export class StateService {
   public customBlocks: CustomBlock[] = [];
   public toolboxXML: string = "";
   public workspaceXML: string = "";
+  public hintVM: HintScreenViewModel;
 
 
   constructor() {
