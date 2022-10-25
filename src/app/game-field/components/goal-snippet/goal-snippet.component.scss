@@ -1,17 +1,18 @@
 .notebook {
     width: 100%;
-    height: calc(100%);
+    height: 100%;
     background-color: beige;
     overflow-y: auto;
 }
 
 .lines {
+    position: absolute;
     border-left: 1px solid #ffaa9f;
     border-right: 1px solid #ffaa9f;
     width: 4px;
     float: left;
-    height: 100%;
-    margin-left: 20px;
+    height: calc(100% - 56px);
+    margin-left: 10px;
     margin-right: 10px;
 }
 
