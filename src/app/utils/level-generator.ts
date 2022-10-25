@@ -10,6 +10,7 @@ import { HtmlPageBlock } from "../data/shared-blocks/html-page.block";
 import { OrderedListBlock } from "../data/shared-blocks/ordered-list.block";
 import { UnorderedListBlock } from "../data/shared-blocks/unordered-list.block";
 import { ListItemBlock, ListItemWithBodyBlock } from "../data/shared-blocks/list-item.block";
+import { PlainTextBlock } from "../data/shared-blocks/plain-text.block";
 
 export function markdownToLevel(name, description, markdown): Level {
     const converter = new Converter();
@@ -95,6 +96,19 @@ function constructBlocksAndToolbox(doc: Node, html: string): { toolboxXML: strin
 
     forEachTreeElement(doc, (node: any) => {
         const tagname = node.tagName;
+        
+        if (node.nodeType === Node.TEXT_NODE && node.textContent.replace(/\s/g,'') !== "") {
+            const txt =  node.textContent.trim();
+            customBlocks.push(new PlainTextBlock());
+            pushUnique({ 
+                id: `raw-text-${txt}`,
+                category: "raw text", 
+                snippet: `
+                <block type="plain_text_node">
+                    <field name="body">${txt}</field>
+                </block>
+                `});
+        }
         if (tagname) {
             switch (tagname.toLowerCase()) {
                 case 'h1':

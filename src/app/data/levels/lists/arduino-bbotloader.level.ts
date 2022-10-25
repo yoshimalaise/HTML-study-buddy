@@ -11,7 +11,7 @@ This procedure is recommended for all Operating System and it is usable only via
 </p>
 <ol>
     <li>
-        <p> First you must upload the EspRecovery sketch on your Arduino UNO WiFi: </p>
+        First you must upload the EspRecovery sketch on your Arduino UNO WiFi:
         <ul>
             <li>Connect the Arduino UNO WiFi to PC with a USB cable.</li>
             <li>Open the Arduino Software (IDE).</li>
@@ -21,7 +21,7 @@ This procedure is recommended for all Operating System and it is usable only via
     </li>
 
     <li>
-        <p> Enter the board in bootloader mode: </p>
+        Enter the board in bootloader mode:
         <ul>
             <li>Disconnect the Arduino Uno WiFi</li>
             <li>Reconnect the board while pressing the ESP B/L button.</li>
@@ -37,7 +37,7 @@ This procedure is recommended for all Operating System and it is usable only via
     </li>
 
     <li>
-        <p>  Test the esptool, for example, inserting the below command to read the MAC address: </p>
+        Test the esptool, for example, inserting the below command to read the MAC address:
         <ul>
             <li> python esptool.py -p your port -b baudrate read_mac</li>
             <li> Set the baudrate at 9600.</li>
