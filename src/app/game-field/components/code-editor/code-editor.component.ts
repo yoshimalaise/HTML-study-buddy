@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxBlocklyConfig, NgxBlocklyGenerator, Blockly } from 'ngx-blockly';
 import { CodeCheckService } from 'src/app/services/code-check.service';
@@ -10,7 +10,7 @@ import * as JavaScript from "blockly/javascript";
   templateUrl: './code-editor.component.html',
   styleUrls: ['./code-editor.component.scss'],
 })
-export class CodeEditorComponent implements OnInit, AfterViewInit {
+export class CodeEditorComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('blocklyComponent') workspace: any;
   private lastCode = "";
 
@@ -50,7 +50,7 @@ export class CodeEditorComponent implements OnInit, AfterViewInit {
   }
 
   @HostListener('unloaded')
-  ngOndeDestroy() {
+  ngOnDestroy() {
 
   }
 

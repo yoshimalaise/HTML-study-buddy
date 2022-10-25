@@ -103,3 +103,105 @@ export class Heading3Block extends CustomBlock {
       }
 
 }
+
+export class Heading4Block extends CustomBlock {
+
+    constructor() {
+        super('heading_4');
+        this.class = Heading4Block;
+    }
+
+    defineBlock() {
+        this.block.appendDummyInput()
+        .appendField("<h4>");
+        this.block.appendDummyInput()
+            .appendField(new Blockly.FieldTextInput("heading 4"), "body");
+        this.block.appendDummyInput()
+            .appendField("</h4>");
+        this.block.setColour(230);
+        this.block.setTooltip("");
+        this.block.setHelpUrl("");
+        this.block.setPreviousStatement(true, null);
+        this.block.setNextStatement(true, null);
+    }
+
+    toXML() {
+        return '<block type="heading_4"></block>';
+    }
+
+    toJavaScriptCode(block: Blockly.Block): string | any[] {
+        var text_result_var = block.getFieldValue('body');
+        // TODO: Assemble JavaScript into code variable.
+        var code = `<h4>${text_result_var}</h4>`;
+        return code;
+      }
+
+}
+
+export class Heading5Block extends CustomBlock {
+
+    constructor() {
+        super('heading_5');
+        this.class = Heading5Block;
+    }
+
+    defineBlock() {
+        this.block.appendDummyInput()
+        .appendField("<h5>");
+        this.block.appendDummyInput()
+            .appendField(new Blockly.FieldTextInput("heading 5"), "body");
+        this.block.appendDummyInput()
+            .appendField("</h5>");
+        this.block.setColour(230);
+        this.block.setTooltip("");
+        this.block.setHelpUrl("");
+        this.block.setPreviousStatement(true, null);
+        this.block.setNextStatement(true, null);
+    }
+
+    toXML() {
+        return '<block type="heading_5"></block>';
+    }
+
+    toJavaScriptCode(block: Blockly.Block): string | any[] {
+        var text_result_var = block.getFieldValue('body');
+        // TODO: Assemble JavaScript into code variable.
+        var code = `<h5>${text_result_var}</h5>`;
+        return code;
+      }
+
+}
+
+export class Heading6Block extends CustomBlock {
+
+    constructor() {
+        super('heading_6');
+        this.class = Heading6Block;
+    }
+
+    defineBlock() {
+        this.block.appendDummyInput()
+        .appendField("<h6>");
+        this.block.appendDummyInput()
+            .appendField(new Blockly.FieldTextInput("heading 6"), "body");
+        this.block.appendDummyInput()
+            .appendField("</h6>");
+        this.block.setColour(230);
+        this.block.setTooltip("");
+        this.block.setHelpUrl("");
+        this.block.setPreviousStatement(true, null);
+        this.block.setNextStatement(true, null);
+    }
+
+    toXML() {
+        return '<block type="heading_6"></block>';
+    }
+
+    toJavaScriptCode(block: Blockly.Block): string | any[] {
+        var text_result_var = block.getFieldValue('body');
+        // TODO: Assemble JavaScript into code variable.
+        var code = `<h6>${text_result_var}</h6>`;
+        return code;
+      }
+
+}

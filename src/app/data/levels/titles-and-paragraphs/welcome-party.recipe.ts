@@ -7,6 +7,10 @@ import { HintScreenViewModel } from "src/app/model/hint-screen-vm.interface";
 import { getH1ElementHint, getPElementHint } from "../../element-hints/element-hints";
 
 const goalHTML = `
+<html>
+<head>
+</head>
+<body>
 <h1> Welcome party</h1>
 <p>
 No actual design yet. But we have a few cool paragraphs here, try to replicate them.
@@ -19,9 +23,8 @@ Morbi dictum placerat augue. Phasellus sit amet venenatis mi. Curabitur vitae ni
 <p>
 Fusce vel magna placerat, mollis nunc eu, semper odio. Vestibulum ut velit a lacus consectetur fringilla auctor et ipsum. Cras aliquam id nibh sodales viverra. Etiam non placerat elit. Duis tempus eros quis augue scelerisque, placerat cursus arcu pharetra. Aliquam convallis, mauris id auctor tempus, odio eros molestie turpis, ac porttitor ante risus ac nisi. Donec convallis maximus purus ac dictum. Praesent convallis varius nisi, sed pretium ante sollicitudin quis. Aliquam molestie massa a mattis sagittis. Phasellus ac tortor justo. Nulla in libero fermentum, rhoncus justo et, dignissim ante. Suspendisse ultrices elementum enim, sed lacinia orci ullamcorper vitae. Nullam at pretium libero. Nulla sit amet elit vitae magna dignissim efficitur. Curabitur sit amet lorem a mauris fringilla convallis.
 </p>
-
-
-
+</body>
+</html>
 `;
 
 const hintVM: HintScreenViewModel = {
