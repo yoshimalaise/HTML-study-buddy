@@ -5,7 +5,7 @@ import { ElementHint, HintScreenViewModel } from "../model/hint-screen-vm.interf
 import { getH1ElementHint, getH2ElementHint, getH3ElementHint, getH4ElementHint, getH5ElementHint, getH6ElementHint, getLiHint, getOlHint, getPElementHint, getUlHint } from "../data/element-hints/element-hints";
 import { CustomBlock } from "ngx-blockly";
 import { Heading1Block, Heading2Block, Heading3Block, Heading4Block, Heading5Block, Heading6Block } from "../data/shared-blocks/headings.block";
-import { ParagraphBlock } from "../data/shared-blocks/paragraph.block";
+import { ParagraphBlock, ParagraphWithBodyBlock } from "../data/shared-blocks/paragraph.block";
 import { HtmlPageBlock } from "../data/shared-blocks/html-page.block";
 import { OrderedListBlock } from "../data/shared-blocks/ordered-list.block";
 import { UnorderedListBlock } from "../data/shared-blocks/unordered-list.block";
@@ -164,6 +164,7 @@ function constructBlocksAndToolbox(doc: Node, html: string): { toolboxXML: strin
                         `});
                     break;
                 case 'p':
+                    customBlocks.push(new ParagraphWithBodyBlock());
                     customBlocks.push(new ParagraphBlock());
                     pushUnique({ 
                         id: `p-${node.innerText}`,
@@ -173,6 +174,13 @@ function constructBlocksAndToolbox(doc: Node, html: string): { toolboxXML: strin
                             <field name="body">${node.innerText}</field>
                         </block>
                         `});
+                        pushUnique({ 
+                            id: `p`,
+                            category: "content", 
+                            snippet: `
+                            <block type="paragraph_with_body">
+                            </block>
+                            `});
                     break;
                 case 'ol':
                     customBlocks.push(new OrderedListBlock());
