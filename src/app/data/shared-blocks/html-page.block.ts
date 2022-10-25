@@ -37,7 +37,7 @@ export class HtmlPageBlock extends CustomBlock {
 
     toJavaScriptCode(block: Blockly.Block): string | any[] {
         var statements_body = JavaScript.statementToCode(block, 'body');
-        var code = statements_body;
+        var code = `<html><head></head><body>${statements_body}</body></html>`;
         return code;
       }
 

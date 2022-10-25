@@ -77,7 +77,6 @@ function stripIds(html: string): string {
 
 function constructBlocksAndToolbox(doc: Node): { toolboxXML: string, customBlocks: CustomBlock[] } {
     forEachTreeElement(doc, (node: any) => {
-        // console.log('this is the node', node);
         
         
     });

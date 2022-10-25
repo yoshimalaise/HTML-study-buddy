@@ -7,6 +7,7 @@ import { HtmlPageBlock } from "../../shared-blocks/html-page.block";
 import { ParagraphBlock } from "../../shared-blocks/paragraph.block";
 
 const goalHTML = `
+<html><head></head><body>
 <h1>Welcome to the team!</h1>
 <p>
 We are so happy to finally have someone with the technical know-how to turn our designs into websites!
@@ -19,6 +20,7 @@ With you on board we will have our project live in no time!
 <p>
 I have to go for now, customers are waiting, good luck with the job!
 </p>
+</body></html>
 `;
 
 const hintVM: HintScreenViewModel = {
