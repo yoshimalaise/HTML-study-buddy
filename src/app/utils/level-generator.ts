@@ -2,7 +2,7 @@ import { LevelDetails } from "../model/level-details.interface";
 import { Level } from "../model/level.interface";
 import { Converter } from 'showdown';
 import { ElementHint, HintScreenViewModel } from "../model/hint-screen-vm.interface";
-import { getH1ElementHint, getH2ElementHint, getH3ElementHint, getH4ElementHint, getH5ElementHint, getH6ElementHint, getLiHint, getOlHint, getPElementHint, getUlHint } from "../data/element-hints/element-hints";
+import { getH1ElementHint, getH2ElementHint, getH3ElementHint, getH4ElementHint, getH5ElementHint, getH6ElementHint, getLiHint, getLinkHint, getOlHint, getPElementHint, getUlHint } from "../data/element-hints/element-hints";
 import { CustomBlock } from "ngx-blockly";
 import { Heading1Block, Heading2Block, Heading3Block, Heading4Block, Heading5Block, Heading6Block } from "../data/shared-blocks/headings.block";
 import { ParagraphBlock, ParagraphWithBodyBlock } from "../data/shared-blocks/paragraph.block";
@@ -11,6 +11,7 @@ import { OrderedListBlock } from "../data/shared-blocks/ordered-list.block";
 import { UnorderedListBlock } from "../data/shared-blocks/unordered-list.block";
 import { ListItemBlock, ListItemWithBodyBlock } from "../data/shared-blocks/list-item.block";
 import { PlainTextBlock } from "../data/shared-blocks/plain-text.block";
+import { LinkBlock, LinkWithBodyBlock } from "../data/shared-blocks/link.block";
 
 export function markdownToLevel(name, description, markdown): Level {
     const converter = new Converter();
@@ -62,6 +63,7 @@ function constructElementHints(html: string): ElementHint[] {
         { tagname: "<ul>", load: getUlHint },
         { tagname: "<ol>", load: getOlHint },
         { tagname: "<li>", load: getLiHint },
+        { tagname: "<a", load: getLinkHint}
     ];
     
     mappings.forEach(m => {
@@ -234,6 +236,27 @@ function constructBlocksAndToolbox(doc: Node, html: string): { toolboxXML: strin
                         category: "lists", 
                         snippet: `
                         <block type="list_item_with_body">
+                        </block>
+                        `});
+                    break;
+                case 'a': 
+                    customBlocks.push(new LinkBlock());
+                    customBlocks.push(new LinkWithBodyBlock());
+                    const attr = node.getAttribute('href');
+                    pushUnique({ 
+                        id: `link-${attr}`,
+                        category: "links", 
+                        snippet: `
+                        <block type="link_node">
+                            <field name="url">${attr}</field>
+                        </block>
+                        `});
+                    pushUnique({ 
+                        id: `link-zith-body-${attr}`,
+                        category: "links", 
+                        snippet: `
+                        <block type="link_node_with_body">
+                            <field name="url">${attr}</field>
                         </block>
                         `});
                     break;

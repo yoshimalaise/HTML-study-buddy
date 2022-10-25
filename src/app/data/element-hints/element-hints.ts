@@ -77,3 +77,11 @@ export function getLiHint() {
         link: "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li"
     }
 }
+
+export function getLinkHint() {
+    return {
+        name: "<a> element",
+        description: "The <a> HTML element (or anchor element), with its href attribute, creates a hyperlink to web pages, files, email addresses, locations in the same page, or anything else a URL can address.",
+        link: "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a?retiredLocale=nl"
+    }
+}
