@@ -4,6 +4,9 @@ import { Converter } from 'showdown';
 import { ElementHint, HintScreenViewModel } from "../model/hint-screen-vm.interface";
 import { getH1ElementHint, getH2ElementHint, getH3ElementHint, getH4ElementHint, getH5ElementHint, getH6ElementHint, getPElementHint } from "../data/element-hints/element-hints";
 import { CustomBlock } from "ngx-blockly";
+import { Heading1Block, Heading2Block, Heading3Block, Heading4Block, Heading5Block, Heading6Block } from "../data/shared-blocks/headings.block";
+import { ParagraphBlock } from "../data/shared-blocks/paragraph.block";
+import { HtmlPageBlock } from "../data/shared-blocks/html-page.block";
 
 export function markdownToLevel(name, description, markdown): Level {
     const converter = new Converter();
@@ -25,8 +28,8 @@ function getLevelDetails(goalHTML, description): LevelDetails {
     const parser = new DOMParser();
     const doc = parser.parseFromString(goalHTML, 'text/html');
 
-    const { toolboxXML, customBlocks} = constructBlocksAndToolbox(doc);
-    const workSpaceXML = '<xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none"></xml>';
+    const { toolboxXML, customBlocks, workSpaceXML} = constructBlocksAndToolbox(doc, goalHTML);
+   
     const hintVM: HintScreenViewModel = {
         generalComment: description,
         requiredElements: constructElementHints(goalHTML.toLowerCase())
@@ -43,7 +46,6 @@ function getLevelDetails(goalHTML, description): LevelDetails {
 
 function constructElementHints(html: string): ElementHint[] {
     const hints: ElementHint[] = [];
-    console.log('the html we are basing our hints on', html);
     // we show the hint as soon as the tag appears in the goal html
     const mappings = [
         { tagname: "<h1", load: getH1ElementHint },
@@ -75,21 +77,127 @@ function stripIds(html: string): string {
     return doc.documentElement.outerHTML;
 }
 
-function constructBlocksAndToolbox(doc: Node): { toolboxXML: string, customBlocks: CustomBlock[] } {
+function constructBlocksAndToolbox(doc: Node, html: string): { toolboxXML: string, customBlocks: CustomBlock[], workSpaceXML: string } {
+    const toolboxSnippets = [];
+    const customBlocks = [new HtmlPageBlock()];
+
+    const pushUnique = (x) => {
+        if (!toolboxSnippets.map(s => s.id).includes(x.id)) {
+            toolboxSnippets.push(x);
+        }
+    }
+
     forEachTreeElement(doc, (node: any) => {
-        
-        
+        const tagname = node.tagName;
+        if (tagname) {
+            switch (tagname.toLowerCase()) {
+                case 'h1':
+                    customBlocks.push(new Heading1Block());
+                    pushUnique({ 
+                        id: `h1-${node.innerText}`,
+                        category: "headings", 
+                        snippet: `
+                        <block type="heading_1">
+                            <field name="body">${node.innerText}</field>
+                        </block>
+                        `});
+                    break;
+                case 'h2':
+                    customBlocks.push(new Heading2Block());
+                    pushUnique({ 
+                        id: `h2-${node.innerText}`,
+                        category: "headings", 
+                        snippet: `
+                        <block type="heading_2">
+                            <field name="body">${node.innerText}</field>
+                        </block>
+                        `});
+                    break;
+                case 'h3':
+                    customBlocks.push(new Heading3Block());
+                    pushUnique({ 
+                        id: `h3-${node.innerText}`,
+                        category: "headings", 
+                        snippet: `
+                        <block type="heading_3">
+                            <field name="body">${node.innerText}</field>
+                        </block>
+                        `});
+                    break;
+                case 'h4':
+                    customBlocks.push(new Heading4Block());
+                    toolboxSnippets.push({ 
+                        id: `h4-${node.innerText}`,
+                        category: "headings", 
+                        snippet: `
+                        <block type="heading_4">
+                            <field name="body">${node.innerText}</field>
+                        </block>
+                        `});
+                    break;
+                case 'h5':
+                    customBlocks.push(new Heading5Block());
+                    toolboxSnippets.push({ 
+                        id: `h5-${node.innerText}`,
+                        category: "headings", 
+                        snippet: `
+                        <block type="heading_5">
+                            <field name="body">${node.innerText}</field>
+                        </block>
+                        `});
+                    break;
+                case 'h6':
+                    customBlocks.push(new Heading6Block());
+                    pushUnique({ 
+                        id: `h6-${node.innerText}`,
+                        category: "headings", 
+                        snippet: `
+                        <block type="heading_6">
+                            <field name="body">${node.innerText}</field>
+                        </block>
+                        `});
+                    break;
+                case 'p':
+                    customBlocks.push(new ParagraphBlock());
+                    pushUnique({ 
+                        id: `p-${node.innerText}`,
+                        category: "content", 
+                        snippet: `
+                        <block type="paragraph">
+                            <field name="body">${node.innerText}</field>
+                        </block>
+                        `});
+                    break;
+            }
+        }
     });
 
-    const customBlocks = []
-
-    return { toolboxXML: `
+    const toolboxXML = `
     <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-    </xml>`, 
-    customBlocks }
+        ${[...new Set([...toolboxSnippets.map(ts => ts.category)])].map(cat => {
+
+            const blocks = toolboxSnippets.filter(ts => ts.category === cat)
+                                        .map(ts => ts.snippet)
+                                        .join("\n");
+
+            return `
+            <category name="${cat}">
+                ${blocks}
+            </category>
+            `
+        }).join('\n')}
+    </xml>
+    `;
+
+    
+    const workSpaceXML = `
+    <xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none">
+        <block type="html_body" id="2}pD0ohd?eOQABj^8xHc" x="163" y="63"></block>
+    </xml>`;
+    return { toolboxXML, workSpaceXML, customBlocks }
 }
 
-// currently ignores childs, we'll need to fix this
+
 function forEachTreeElement(doc, callback: (Node) => void) {
     const walker = document.createTreeWalker(doc);
     let currentNode = walker.currentNode;

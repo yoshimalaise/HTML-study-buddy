@@ -1,8 +1,8 @@
 import { LevelGroup } from "src/app/model/level-group.interface";
 import { WelcomePartyRecipe } from "./welcome-party.recipe";
-import { markdownTest } from "./markdown-test.level";
+import { employeeManual } from "./employee-manual.level";
 
 export const titlesAndParagraphsGroup: LevelGroup = {
     name: "Titles and Paragraphs",
-    levels: [WelcomePartyRecipe, markdownTest]
+    levels: [WelcomePartyRecipe, employeeManual]
 }
