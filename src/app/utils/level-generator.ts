@@ -2,11 +2,13 @@ import { LevelDetails } from "../model/level-details.interface";
 import { Level } from "../model/level.interface";
 import { Converter } from 'showdown';
 import { ElementHint, HintScreenViewModel } from "../model/hint-screen-vm.interface";
-import { getH1ElementHint, getH2ElementHint, getH3ElementHint, getH4ElementHint, getH5ElementHint, getH6ElementHint, getPElementHint } from "../data/element-hints/element-hints";
+import { getH1ElementHint, getH2ElementHint, getH3ElementHint, getH4ElementHint, getH5ElementHint, getH6ElementHint, getLiHint, getOlHint, getPElementHint, getUlHint } from "../data/element-hints/element-hints";
 import { CustomBlock } from "ngx-blockly";
 import { Heading1Block, Heading2Block, Heading3Block, Heading4Block, Heading5Block, Heading6Block } from "../data/shared-blocks/headings.block";
 import { ParagraphBlock } from "../data/shared-blocks/paragraph.block";
 import { HtmlPageBlock } from "../data/shared-blocks/html-page.block";
+import { OrderedListBlock } from "../data/shared-blocks/ordered-list.block";
+import { UnorderedListBlock } from "../data/shared-blocks/unordered-list.block";
 
 export function markdownToLevel(name, description, markdown): Level {
     const converter = new Converter();
@@ -54,7 +56,10 @@ function constructElementHints(html: string): ElementHint[] {
         { tagname: "<h4", load: getH4ElementHint },
         { tagname: "<h5", load: getH5ElementHint },
         { tagname: "<h6", load: getH6ElementHint },
-        { tagname: "<p>", load: getPElementHint }
+        { tagname: "<p>", load: getPElementHint },
+        { tagname: "<ul>", load: getUlHint },
+        { tagname: "<ol>", load: getOlHint },
+        { tagname: "<li>", load: getLiHint },
     ];
     
     mappings.forEach(m => {
@@ -165,6 +170,26 @@ function constructBlocksAndToolbox(doc: Node, html: string): { toolboxXML: strin
                         snippet: `
                         <block type="paragraph">
                             <field name="body">${node.innerText}</field>
+                        </block>
+                        `});
+                    break;
+                case 'ol':
+                    customBlocks.push(new OrderedListBlock());
+                    pushUnique({ 
+                        id: `ordered-list`,
+                        category: "lists", 
+                        snippet: `
+                        <block type="ordered_list">
+                        </block>
+                        `});
+                    break;
+                case 'ul':
+                    customBlocks.push(new UnorderedListBlock());
+                    pushUnique({ 
+                        id: `unordered-list`,
+                        category: "lists", 
+                        snippet: `
+                        <block type="unordered_list">
                         </block>
                         `});
                     break;

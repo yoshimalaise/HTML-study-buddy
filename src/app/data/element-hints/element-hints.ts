@@ -53,3 +53,27 @@ export function getH6ElementHint() {
         link: "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements"
     }
 }
+
+export function getUlHint() {
+    return {
+        name: "<ul> element",
+        description: "The <ul> HTML element represents an unordered list of items, typically rendered as a bulleted list.",
+        link: "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul"
+    }
+}
+
+export function getOlHint() {
+    return {
+        name: "<ol> element",
+        description: "The <ol> HTML element represents an ordered list of items — typically rendered as a numbered list.",
+        link: "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol"
+    }
+}
+
+export function getLiHint() {
+    return {
+        name: "<li> element",
+        description: "The <li> HTML element is used to represent an item in a list. It must be contained in a parent element: an ordered list (<ol>), an unordered list (<ul>), or a menu (<menu>). In menus and unordered lists, list items are usually displayed using bullet points. In ordered lists, they are usually displayed with an ascending counter on the left, such as a number or letter.",
+        link: "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li"
+    }
+}
