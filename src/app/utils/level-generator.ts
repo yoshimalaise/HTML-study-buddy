@@ -2,7 +2,7 @@ import { LevelDetails } from "../model/level-details.interface";
 import { Level } from "../model/level.interface";
 import { Converter } from 'showdown';
 import { ElementHint, HintScreenViewModel } from "../model/hint-screen-vm.interface";
-import { getH1ElementHint, getH2ElementHint, getH3ElementHint, getH4ElementHint, getH5ElementHint, getH6ElementHint, getLiHint, getLinkHint, getOlHint, getPElementHint, getUlHint } from "../data/element-hints/element-hints";
+import { getH1ElementHint, getH2ElementHint, getH3ElementHint, getH4ElementHint, getH5ElementHint, getH6ElementHint, getImgHint, getLiHint, getLinkHint, getOlHint, getPElementHint, getUlHint } from "../data/element-hints/element-hints";
 import { CustomBlock } from "ngx-blockly";
 import { Heading1Block, Heading2Block, Heading3Block, Heading4Block, Heading5Block, Heading6Block } from "../data/shared-blocks/headings.block";
 import { ParagraphBlock, ParagraphWithBodyBlock } from "../data/shared-blocks/paragraph.block";
@@ -12,6 +12,7 @@ import { UnorderedListBlock } from "../data/shared-blocks/unordered-list.block";
 import { ListItemBlock, ListItemWithBodyBlock } from "../data/shared-blocks/list-item.block";
 import { PlainTextBlock } from "../data/shared-blocks/plain-text.block";
 import { LinkBlock, LinkWithBodyBlock } from "../data/shared-blocks/link.block";
+import { ImgBlock } from "../data/shared-blocks/img.block";
 
 export function markdownToLevel(name, description, markdown): Level {
     const converter = new Converter();
@@ -33,8 +34,8 @@ function getLevelDetails(goalHTML, description): LevelDetails {
     const parser = new DOMParser();
     const doc = parser.parseFromString(goalHTML, 'text/html');
 
-    const { toolboxXML, customBlocks, workSpaceXML} = constructBlocksAndToolbox(doc, goalHTML);
-   
+    const { toolboxXML, customBlocks, workSpaceXML } = constructBlocksAndToolbox(doc, goalHTML);
+
     const hintVM: HintScreenViewModel = {
         generalComment: description,
         requiredElements: constructElementHints(goalHTML.toLowerCase())
@@ -63,9 +64,10 @@ function constructElementHints(html: string): ElementHint[] {
         { tagname: "<ul>", load: getUlHint },
         { tagname: "<ol>", load: getOlHint },
         { tagname: "<li>", load: getLiHint },
-        { tagname: "<a", load: getLinkHint}
+        { tagname: "<a", load: getLinkHint },
+        { tagname: "<img", load: getImgHint }
     ];
-    
+
     mappings.forEach(m => {
         if (html.includes(m.tagname)) {
             hints.push(m.load());
@@ -98,13 +100,13 @@ function constructBlocksAndToolbox(doc: Node, html: string): { toolboxXML: strin
 
     forEachTreeElement(doc, (node: any) => {
         const tagname = node.tagName;
-        
-        if (node.nodeType === Node.TEXT_NODE && node.textContent.replace(/\s/g,'') !== "") {
-            const txt =  node.textContent.trim();
+
+        if (node.nodeType === Node.TEXT_NODE && node.textContent.replace(/\s/g, '') !== "") {
+            const txt = node.textContent.trim();
             customBlocks.push(new PlainTextBlock());
-            pushUnique({ 
+            pushUnique({
                 id: `raw-text-${txt}`,
-                category: "raw text", 
+                category: "raw text",
                 snippet: `
                 <block type="plain_text_node">
                     <field name="body">${txt}</field>
@@ -115,9 +117,9 @@ function constructBlocksAndToolbox(doc: Node, html: string): { toolboxXML: strin
             switch (tagname.toLowerCase()) {
                 case 'h1':
                     customBlocks.push(new Heading1Block());
-                    pushUnique({ 
+                    pushUnique({
                         id: `h1-${node.innerText}`,
-                        category: "headings", 
+                        category: "headings",
                         snippet: `
                         <block type="heading_1">
                             <field name="body">${node.innerText}</field>
@@ -126,9 +128,9 @@ function constructBlocksAndToolbox(doc: Node, html: string): { toolboxXML: strin
                     break;
                 case 'h2':
                     customBlocks.push(new Heading2Block());
-                    pushUnique({ 
+                    pushUnique({
                         id: `h2-${node.innerText}`,
-                        category: "headings", 
+                        category: "headings",
                         snippet: `
                         <block type="heading_2">
                             <field name="body">${node.innerText}</field>
@@ -137,9 +139,9 @@ function constructBlocksAndToolbox(doc: Node, html: string): { toolboxXML: strin
                     break;
                 case 'h3':
                     customBlocks.push(new Heading3Block());
-                    pushUnique({ 
+                    pushUnique({
                         id: `h3-${node.innerText}`,
-                        category: "headings", 
+                        category: "headings",
                         snippet: `
                         <block type="heading_3">
                             <field name="body">${node.innerText}</field>
@@ -148,9 +150,9 @@ function constructBlocksAndToolbox(doc: Node, html: string): { toolboxXML: strin
                     break;
                 case 'h4':
                     customBlocks.push(new Heading4Block());
-                    toolboxSnippets.push({ 
+                    toolboxSnippets.push({
                         id: `h4-${node.innerText}`,
-                        category: "headings", 
+                        category: "headings",
                         snippet: `
                         <block type="heading_4">
                             <field name="body">${node.innerText}</field>
@@ -159,9 +161,9 @@ function constructBlocksAndToolbox(doc: Node, html: string): { toolboxXML: strin
                     break;
                 case 'h5':
                     customBlocks.push(new Heading5Block());
-                    toolboxSnippets.push({ 
+                    toolboxSnippets.push({
                         id: `h5-${node.innerText}`,
-                        category: "headings", 
+                        category: "headings",
                         snippet: `
                         <block type="heading_5">
                             <field name="body">${node.innerText}</field>
@@ -170,9 +172,9 @@ function constructBlocksAndToolbox(doc: Node, html: string): { toolboxXML: strin
                     break;
                 case 'h6':
                     customBlocks.push(new Heading6Block());
-                    pushUnique({ 
+                    pushUnique({
                         id: `h6-${node.innerText}`,
-                        category: "headings", 
+                        category: "headings",
                         snippet: `
                         <block type="heading_6">
                             <field name="body">${node.innerText}</field>
@@ -182,27 +184,27 @@ function constructBlocksAndToolbox(doc: Node, html: string): { toolboxXML: strin
                 case 'p':
                     customBlocks.push(new ParagraphWithBodyBlock());
                     customBlocks.push(new ParagraphBlock());
-                    pushUnique({ 
+                    pushUnique({
                         id: `p-${node.innerText}`,
-                        category: "content", 
+                        category: "content",
                         snippet: `
                         <block type="paragraph">
                             <field name="body">${node.innerText}</field>
                         </block>
                         `});
-                        pushUnique({ 
-                            id: `p`,
-                            category: "content", 
-                            snippet: `
+                    pushUnique({
+                        id: `p`,
+                        category: "content",
+                        snippet: `
                             <block type="paragraph_with_body">
                             </block>
                             `});
                     break;
                 case 'ol':
                     customBlocks.push(new OrderedListBlock());
-                    pushUnique({ 
+                    pushUnique({
                         id: `ordered-list`,
-                        category: "lists", 
+                        category: "lists",
                         snippet: `
                         <block type="ordered_list">
                         </block>
@@ -210,9 +212,9 @@ function constructBlocksAndToolbox(doc: Node, html: string): { toolboxXML: strin
                     break;
                 case 'ul':
                     customBlocks.push(new UnorderedListBlock());
-                    pushUnique({ 
+                    pushUnique({
                         id: `unordered-list`,
-                        category: "lists", 
+                        category: "lists",
                         snippet: `
                         <block type="unordered_list">
                         </block>
@@ -222,41 +224,55 @@ function constructBlocksAndToolbox(doc: Node, html: string): { toolboxXML: strin
                     customBlocks.push(new ListItemBlock());
                     customBlocks.push(new ListItemWithBodyBlock());
                     if (node.innerText && node.innerText !== "") {
-                        pushUnique({ 
+                        pushUnique({
                             id: `list-item-${node.innerText}`,
-                            category: "lists", 
+                            category: "lists",
                             snippet: `
                             <block type="list_item">
                                 <field name="body">${node.innerText}</field>
                             </block>
                             `});
                     }
-                    pushUnique({ 
+                    pushUnique({
                         id: `list-item-body`,
-                        category: "lists", 
+                        category: "lists",
                         snippet: `
                         <block type="list_item_with_body">
                         </block>
                         `});
                     break;
-                case 'a': 
+                case 'a':
                     customBlocks.push(new LinkBlock());
                     customBlocks.push(new LinkWithBodyBlock());
                     const attr = node.getAttribute('href');
-                    pushUnique({ 
+                    pushUnique({
                         id: `link-${attr}`,
-                        category: "links", 
+                        category: "links",
                         snippet: `
                         <block type="link_node">
                             <field name="url">${attr}</field>
                         </block>
                         `});
-                    pushUnique({ 
+                    pushUnique({
                         id: `link-zith-body-${attr}`,
-                        category: "links", 
+                        category: "links",
                         snippet: `
                         <block type="link_node_with_body">
                             <field name="url">${attr}</field>
+                        </block>
+                        `});
+                    break;
+                case 'img':
+                    customBlocks.push(new ImgBlock());
+                    const src = node.getAttribute('src');
+                    const alt = node.getAttribute('alt');
+                    pushUnique({
+                        id: `img-${alt}`,
+                        category: "media",
+                        snippet: `
+                        <block type="img">
+                            <field name="url">${src}</field>
+                            <field name="alt">${alt}</field>
                         </block>
                         `});
                     break;
@@ -268,20 +284,20 @@ function constructBlocksAndToolbox(doc: Node, html: string): { toolboxXML: strin
     <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
         ${[...new Set([...toolboxSnippets.map(ts => ts.category)])].map(cat => {
 
-            const blocks = toolboxSnippets.filter(ts => ts.category === cat)
-                                        .map(ts => ts.snippet)
-                                        .join("\n");
+        const blocks = toolboxSnippets.filter(ts => ts.category === cat)
+            .map(ts => ts.snippet)
+            .join("\n");
 
-            return `
+        return `
             <category name="${cat}">
                 ${blocks}
             </category>
             `
-        }).join('\n')}
+    }).join('\n')}
     </xml>
     `;
 
-    
+
     const workSpaceXML = `
     <xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none">
         <block type="html_body" id="2}pD0ohd?eOQABj^8xHc" x="163" y="63"></block>
@@ -293,9 +309,9 @@ function constructBlocksAndToolbox(doc: Node, html: string): { toolboxXML: strin
 function forEachTreeElement(doc, callback: (Node) => void) {
     const walker = document.createTreeWalker(doc);
     let currentNode = walker.currentNode;
-    while(currentNode) {
+    while (currentNode) {
         callback(currentNode);
-        if(currentNode.hasChildNodes()) {
+        if (currentNode.hasChildNodes()) {
             currentNode.childNodes.forEach(n => forEachTreeElement(n, callback));
         }
         currentNode = walker.nextNode();

@@ -85,3 +85,11 @@ export function getLinkHint() {
         link: "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a?retiredLocale=nl"
     }
 }
+
+export function getImgHint() {
+    return {
+        name: "<img> element",
+        description: "The <img> HTML element embeds an image into the document.",
+        link: "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img"
+    }
+}
