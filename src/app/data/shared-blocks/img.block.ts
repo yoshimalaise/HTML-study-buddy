@@ -17,7 +17,7 @@ export class ImgBlock extends CustomBlock {
             .appendField("\"></img>");
         this.block.setPreviousStatement(true, null);
         this.block.setNextStatement(true, null);
-        this.block.setColour(230);
+        this.block.setColour(2);
         this.block.setTooltip("");
         this.block.setHelpUrl("");
     }
