@@ -33,3 +33,36 @@ export class ListItemBlock extends CustomBlock {
       }
 
 }
+
+export class ListItemWithBodyBlock extends CustomBlock {
+
+    constructor() {
+        super('list_item_with_body');
+        this.class = ListItemWithBodyBlock;
+    }
+
+    defineBlock() {
+        this.block.appendDummyInput()
+            .appendField("<li>");
+        this.block.appendStatementInput("body")
+            .setCheck(null);
+        this.block.appendDummyInput()
+            .appendField("</li>");
+        this.block.setPreviousStatement(true, null);
+        this.block.setNextStatement(true, null);
+        this.block.setColour(285);
+        this.block.setTooltip("");
+        this.block.setHelpUrl("");
+    }
+
+    toXML() {
+        return '<block type="list_item_with_body"></block>';
+    }
+
+    toJavaScriptCode(block: Blockly.Block): string | any[] {
+        const statements_body = JavaScript.statementToCode(block, 'body');
+        const code = `<li>${statements_body}</li>`;
+        return code;
+      }
+
+}

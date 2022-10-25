@@ -9,6 +9,7 @@ import { ParagraphBlock } from "../data/shared-blocks/paragraph.block";
 import { HtmlPageBlock } from "../data/shared-blocks/html-page.block";
 import { OrderedListBlock } from "../data/shared-blocks/ordered-list.block";
 import { UnorderedListBlock } from "../data/shared-blocks/unordered-list.block";
+import { ListItemBlock, ListItemWithBodyBlock } from "../data/shared-blocks/list-item.block";
 
 export function markdownToLevel(name, description, markdown): Level {
     const converter = new Converter();
@@ -190,6 +191,27 @@ function constructBlocksAndToolbox(doc: Node, html: string): { toolboxXML: strin
                         category: "lists", 
                         snippet: `
                         <block type="unordered_list">
+                        </block>
+                        `});
+                    break;
+                case 'li':
+                    customBlocks.push(new ListItemBlock());
+                    customBlocks.push(new ListItemWithBodyBlock());
+                    if (node.innerText && node.innerText !== "") {
+                        pushUnique({ 
+                            id: `list-item-${node.innerText}`,
+                            category: "lists", 
+                            snippet: `
+                            <block type="list_item">
+                                <field name="body">${node.innerText}</field>
+                            </block>
+                            `});
+                    }
+                    pushUnique({ 
+                        id: `list-item-body`,
+                        category: "lists", 
+                        snippet: `
+                        <block type="list_item_with_body">
                         </block>
                         `});
                     break;
