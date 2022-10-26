@@ -95,6 +95,39 @@ The &lt;img> tag can be used to show images on your webpage.
 </img>
 \`\`\`
 
+---
+
+##  Attributes
+
+The image tag needs two attributes
+
+---
+
+## src
+
+The src attribute contains the link to image that you want to show
+
+\`\`\`html [2]
+<img 
+   src="path/to/image" 
+   alt="description">
+</img>
+\`\`\`
+
+---
+
+## alt
+
+The alt attribute should contain an alternative text that describes what is on the image.
+This will be used when people use screenreaders.
+
+\`\`\`html [3]
+<img 
+   src="path/to/image" 
+   alt="description">
+</img>
+\`\`\`
+
 `;
 
 export const linksAndMediaGroup: LevelGroup = {
