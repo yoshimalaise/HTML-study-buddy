@@ -15,10 +15,11 @@ import { GoalSnippetComponent } from './game-field/components/goal-snippet/goal-
 import { ResultViewComponent } from './game-field/components/result-view/result-view.component';
 import { HintScreenModalComponent } from './modals/hint-screen-modal/hint-screen-modal.component';
 import { AboutPageComponent } from './about-page/about-page.component';
+import { PresentationModalComponent } from './modals/presentation-modal/presentation-modal.component';
 
 @NgModule({
   declarations: [AppComponent, LevelSelectComponent, GameFieldComponent, CodeEditorComponent, GoalSnippetComponent,
-    ResultViewComponent, HintScreenModalComponent, AboutPageComponent],
+    ResultViewComponent, HintScreenModalComponent, AboutPageComponent, PresentationModalComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, CommonModule, 
     FormsModule, NgxBlocklyModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

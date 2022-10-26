@@ -19,7 +19,7 @@ export class StateService {
   public hintVM: HintScreenViewModel;
   public isMobileDevice: boolean = false;
   public showTutorial: boolean = false;
-
+  public presentationMarkdown: string = "";
 
   constructor(private deviceDetector: DeviceDetectorService) {
     this.isMobileDevice = deviceDetector.isMobile();
