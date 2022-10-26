@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Presentation</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Done</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <div id="container">
+    <div class="reveal">
+       <div class="slides">
+         <section data-markdown>
+           <textarea data-template>
+             {{ state.presentationMarkdown }}
+           </textarea>
+         </section>
+       </div>
+    </div>
+   </div>
+</ion-content>

@@ -20,7 +20,13 @@
         <ion-card-content>
         
           <div class="level-group" *ngFor="let lgroup of state.levelGroups">
-            <h3> {{ lgroup.name }}</h3>
+            
+            <div class="heading-container">
+              <h3> {{ lgroup.name }}</h3>
+              <ion-button (click)="startPresentation(lgroup)">
+                <ion-icon name="albums-outline"></ion-icon>
+              </ion-button>
+            </div>
 
             <ion-list>
               <ion-item button (click)="selectLevel(level)" *ngFor="let level of lgroup.levels">

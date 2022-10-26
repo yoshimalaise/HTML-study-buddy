@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { PresentationModalComponent } from 'src/app/modals/presentation-modal/presentation-modal.component';
+import { LevelGroup } from 'src/app/model/level-group.interface';
 import { Level } from 'src/app/model/level.interface';
 import { StateService } from 'src/app/services/state.service';
 
@@ -10,7 +13,7 @@ import { StateService } from 'src/app/services/state.service';
 })
 export class LevelSelectComponent implements OnInit {
 
-  constructor(public state: StateService, private router: Router) { }
+  constructor(public state: StateService, private router: Router, private modalCtrl: ModalController,) { }
 
   ngOnInit() {}
 
@@ -24,6 +27,17 @@ export class LevelSelectComponent implements OnInit {
     this.state.hintVM = details.hintVM;
     this.state.showTutorial = false;
     this.router.navigateByUrl('game-field');
+  }
+
+  async startPresentation(lvlGroup: LevelGroup) {
+    this.state.presentationMarkdown = lvlGroup.presentationMarkdown
+    const modal = await this.modalCtrl.create({
+      component: PresentationModalComponent,
+      componentProps: { 
+        presentationMarkdown: lvlGroup.presentationMarkdown,
+      }
+    });
+    modal.present();
   }
 
 }
